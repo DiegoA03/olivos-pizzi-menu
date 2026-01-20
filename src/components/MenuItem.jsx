@@ -8,11 +8,7 @@ function MenuItem({ item, color }) {
     raph: 'border-red-500',
     don: 'border-purple-500',
     mikey: 'border-orange-500',
-    neonGreen:'border-green-500',
-    yellow:'border-yellow-500',
-    pink:'border-pink-500',
-    blue:'border-blue-500'
-
+    neongreen:'border-green-500',
   };
 
   return (
