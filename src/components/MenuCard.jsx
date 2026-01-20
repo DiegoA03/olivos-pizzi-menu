@@ -29,7 +29,7 @@ function MenuCard({ menu, isHighlighted }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Imagen */}
-      <div className="relative h-72 overflow-hidden">
+      <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
         <img
           src={menu.image}
           alt={menu.category}
@@ -42,13 +42,13 @@ function MenuCard({ menu, isHighlighted }) {
       </div>
 
       {/* Contenido */}
-      <div className="p-10">
+      <div className="p-6 sm:p-8 md:p-10">
         {/* Header */}
-        <div className="flex items-center gap-5 mb-9 pb-6 border-b-3 border-white/10">
-          <div className={`text-7xl drop-shadow-[0_0_25px]`}>
+        <div className="flex items-center gap-3 sm:gap-4 md:gap-5 mb-6 sm:mb-7 md:mb-9 pb-4 sm:pb-5 md:pb-6 border-b-3 border-white/10">
+          <div className={`text-5xl sm:text-6xl md:text-7xl drop-shadow-[0_0_25px]`}>
             {menu.icon}
           </div>
-          <h2 className={`font-black text-4xl tracking-wider uppercase drop-shadow-[0_0_20px]`}>
+          <h2 className={`font-black text-2xl sm:text-3xl md:text-4xl tracking-wider uppercase drop-shadow-[0_0_20px]`}>
             {menu.category}
           </h2>
         </div>
