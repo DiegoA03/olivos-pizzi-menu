@@ -1,0 +1,59 @@
+import { Link } from 'react-router-dom';
+import TypewriterText from '../components/TypewriterText';
+
+function Home() {
+  return (
+    <div className="min-h-[75vh] grid grid-cols-1 lg:grid-cols-2 items-center gap-12 py-10">
+      
+      {/* Columna izquierda - Texto */}
+      <div className="text-center lg:text-left order-2 lg:order-1">
+        <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/40 text-green-400 px-4 py-2 rounded-full text-sm font-barlow font-semibold mb-6">
+          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+           Bienvenido a la cocina ninja
+        </div>
+
+        <h1 className="font-elegant font-black text-3xl sm:text-4xl md:text-5xl text-white mb-4 min-h-[1.4em]">
+          Hola, soy{' '}
+          <span className="text-green-400">
+            <TypewriterText text="Jesús Medina" speed={90} />
+          </span>
+        </h1>
+
+        <p className="font-bungee text-lg sm:text-xl text-orange-500 tracking-wide mb-6">
+          Fundador de Olivos Pizzi
+        </p>
+
+        <p className="font-elegant italic text-lg sm:text-xl text-gray-300 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+          "Cada pizza que sale de nuestro horno lleva el espíritu ninja:
+          pasión, disciplina y sabor en cada bocado."
+        </p>
+
+        <Link
+          to="/pizzas"
+          className="inline-block bg-gradient-to-r from-green-500 to-green-600 text-black font-barlow font-bold px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-[0_10px_30px_rgba(76,209,55,0.5)]"
+        >
+          Ver Nuestro Menú
+        </Link>
+      </div>
+
+      {/* Columna derecha - Imagen del dueño */}
+      <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div className="relative animate-float">
+          <div className="absolute inset-0 bg-green-500/30 rounded-full blur-3xl scale-90" />
+          
+          {/* 
+            📌 PLACEHOLDER: Cuando tengas la foto real del dueño en PNG SIN FONDO,
+            borra el <div> de abajo y descomenta esta línea:
+            
+            <img src="/jesus-medina.png" alt="Jesús Medina" className="relative w-64 sm:w-80 md:w-96 drop-shadow-2xl" />
+          */}
+          <div className="relative w-64 h-80 sm:w-80 sm:h-96 flex items-center justify-center">
+            <div className="text-[10rem] sm:text-[13rem] drop-shadow-2xl">🥷</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Home;

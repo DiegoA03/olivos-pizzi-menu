@@ -1,31 +1,78 @@
+import { Link } from 'react-router-dom';
+
 function Footer() {
+  const year = new Date().getFullYear();
+
+  const categories = [
+    { name: 'Pizzas', path: '/pizzas' },
+    { name: 'Hamburguesas', path: '/hamburguesas' },
+    { name: 'Hot Dogs', path: '/hotdogs' },
+    { name: 'Choriperros', path: '/choriperros' },
+    { name: 'Papas', path: '/papas' },
+    { name: 'Bebidas', path: '/bebidas' },
+  ];
+
   return (
-    <footer className="text-center py-16 px-10 bg-gradient-to-br from-zinc-900/95 to-zinc-950/95 rounded-[40px] mt-20 relative overflow-hidden backdrop-blur-xl border-3 border-green-500/30 shadow-[0_25px_70px_rgba(0,0,0,0.6)]">
-      {/* Efecto de brillo rotatorio */}
-      <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle,rgba(76,209,55,0.1)_0%,transparent_70%)] animate-spin" style={{ animationDuration: '20s' }} />
-      
-      <div className="relative z-10">
-        {/* Título */}
-        <div className="font-black text-5xl md:text-6xl bg-gradient-to-r from-green-400 via-orange-500 via-red-500 via-blue-500 to-purple-500 bg-clip-text text-transparent mb-6 drop-shadow-[0_0_20px_rgba(76,209,55,0.5)]">
-          🐢 TURTLE POWER! 🐢
+    <footer className="border-t border-white/10 bg-black/60 backdrop-blur-md mt-20">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
+
+          {/* Marca */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-lg">
+                🐢
+              </div>
+              <span className="font-elegant font-bold text-lg text-green-400">
+                Olivos Pizzi
+              </span>
+            </div>
+            <p className="text-gray-400 text-sm font-barlow leading-relaxed">
+              Pizza artesanal, hamburguesas y comida rápida con actitud ninja.
+              Sabor, disciplina y pasión en cada plato.
+            </p>
+          </div>
+
+          {/* Menú */}
+          <div>
+            <h3 className="font-barlow font-semibold text-white text-sm uppercase tracking-wider mb-4">
+              Menú
+            </h3>
+            <ul className="space-y-2">
+              {categories.map((cat) => (
+                <li key={cat.path}>
+                  <Link
+                    to={cat.path}
+                    className="text-gray-400 text-sm font-barlow hover:text-green-400 transition-colors"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contacto */}
+          <div>
+            <h3 className="font-barlow font-semibold text-white text-sm uppercase tracking-wider mb-4">
+              Contacto
+            </h3>
+            <ul className="space-y-2 text-sm font-barlow text-gray-400">
+              <li>Cúcuta, Norte de Santander</li>
+              <li>+57 320 819 8473</li>
+              <li>Pedidos por WhatsApp</li>
+            </ul>
+          </div>
         </div>
-        
-        {/* Social */}
-        <div className="text-2xl md:text-3xl text-green-400 font-bold my-6 drop-shadow-[0_0_20px_rgba(76,209,55,0.6)]">
-          📱 contactanos: 3208198473
-        </div>
-        
-        {/* Cita */}
-        <p className="text-gray-400 text-xl md:text-2xl italic my-6 leading-relaxed max-w-3xl mx-auto">
-          "La pizza es como la vida: hay que disfrutarla mientras esté caliente"
-          <br />
-          <strong className="text-orange-500">- Jesus Medina</strong>
-        </p>
-        
-        {/* Notas */}
-        <div className="text-gray-500 text-base md:text-lg mt-6 space-y-2">
-          <div>💰 Todos los precios en COP (Pesos Colombianos)</div>
-          <div>📍 Bogota, soacha cundinamarca</div>
+
+        {/* Línea inferior */}
+        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <p className="text-gray-500 text-xs font-barlow">
+            © {year} Olivos Pizzi. Todos los derechos reservados.
+          </p>
+          <p className="text-gray-600 text-xs font-barlow">
+            Todos los precios en COP
+          </p>
         </div>
       </div>
     </footer>

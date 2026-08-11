@@ -11,7 +11,12 @@ export default {
         raph: '#e74c3c',
         don: '#9b59b6',
         mikey: '#f39c12',
-        neonGreen: '#4cd137'
+        neonGreen: '#4cd137',
+      },
+      fontFamily: {
+        bungee: ['Bungee', 'cursive'],
+        barlow: ['Barlow', 'sans-serif'],
+        elegant: ['Cinzel', 'serif'],
       },
     },
   },

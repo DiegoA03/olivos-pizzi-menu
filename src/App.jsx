@@ -1,48 +1,45 @@
-import { useState } from 'react';
-import Header from './components/Header';
-import TurtleBadges from './components/TurtleBadges';
-import MenuCard from './components/MenuCard';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import WhatsAppButton from './components/WhatsAppButton';
 import Footer from './components/Footer';
-import AnimatedBackground from './components/AnimatedBackground';
-import { menuData } from './data/menuData';
+import NinjaBackground from './components/NinjaBackground';
+import NinjaCursor from './components/NinjaCursor';
+import Home from './pages/Home';
+import Pizzas from './pages/Pizzas';
+import Hamburguesas from './pages/Hamburguesas';
+import HotDogs from './pages/HotDogs';
+import Choriperros from './pages/Choriperros';
+import Papas from './pages/Papas';
+import Bebidas from './pages/Bebidas';
 import './App.css';
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const scrollToCategory = (categoryId) => {
-    const element = document.getElementById(categoryId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setSelectedCategory(categoryId);
-      
-      // Remover highlight después de 1 segundo
-      setTimeout(() => setSelectedCategory(null), 1000);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <AnimatedBackground />
-      
-      <div className="relative z-10 max-w-[1600px] mx-auto px-5 py-5">
-        <Header />
-        
-        <TurtleBadges onBadgeClick={scrollToCategory} />
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {menuData.map((menu) => (
-            <MenuCard
-              key={menu.id}
-              menu={menu}
-              isHighlighted={selectedCategory === menu.id}
-            />
-          ))}
+    <BrowserRouter>
+      <div className="min-h-screen text-white overflow-x-hidden relative">    
+       <NinjaBackground />
+       <NinjaCursor />
+        <div className="relative z-10">
+          <Navbar />
+
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/pizzas" element={<Pizzas />} />
+              <Route path="/hamburguesas" element={<Hamburguesas />} />
+              <Route path="/hotdogs" element={<HotDogs />} />
+              <Route path="/choriperros" element={<Choriperros />} />
+              <Route path="/papas" element={<Papas />} />
+              <Route path="/bebidas" element={<Bebidas />} />
+            </Routes>
+          </div>
+
+          <Footer />
         </div>
-        
-        <Footer />
+
+        <WhatsAppButton />
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
