@@ -2,7 +2,7 @@ function WhatsAppButton() {
   // 📌 CAMBIA ESTE NÚMERO por el número real del negocio
   // Formato: código de país + número, sin espacios ni símbolos
   const phoneNumber = '573208198473'; // Ejemplo basado en tu menú original
-  const message = '¡Hola! Quiero hacer un pedido en Olivos Pizzi 🍕🐢';
+  const message = '¡Hola! Quiero hacer un pedido en Olivos Pizzi.';
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
