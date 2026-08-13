@@ -8,8 +8,8 @@ const FACEBOOK_PATH = "M22.675 0h-21.35C.6 0 0 .6 0 1.326v21.348C0 23.4.6 24 1.3
 
 const socials = [
   { name: 'WhatsApp', href: 'https://wa.me/573208198473', path: WHATSAPP_PATH },
-  { name: 'Instagram', href: 'https://instagram.com/olivospizzi', path: INSTAGRAM_PATH },
-  { name: 'Facebook', href: 'https://facebook.com/olivospizzi', path: FACEBOOK_PATH },
+  { name: 'Instagram', href: 'https://instagram.com/jerame1980', path: INSTAGRAM_PATH },
+  { name: 'Facebook', href: 'https://facebook.com/jesusraul.medinaarevalo', path: FACEBOOK_PATH },
 ];
 
 const categories = [
