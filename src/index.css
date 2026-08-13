@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --accent: #4cd137;
+  --accent-rgb: 76, 209, 55;
+}
 html,
 body {
   margin: 0;

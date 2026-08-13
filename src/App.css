@@ -60,7 +60,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
 }
 
@@ -91,9 +91,9 @@
 .ninja-cursor-ring {
   position: absolute;
   inset: 0;
-  border: 2px solid #4cd137;
+  border: 2px solid var(--accent, #4cd137);
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(76, 209, 55, 0.6);
+  box-shadow: 0 0 10px var(--accent, #4cd137);
   transition: transform 0.15s ease-out, border-color 0.15s ease-out, width 0.15s ease-out, height 0.15s ease-out;
 }
 
@@ -103,10 +103,10 @@
   left: 50%;
   width: 5px;
   height: 5px;
-  background: #4cd137;
+  background: var(--accent, #4cd137);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 6px rgba(76, 209, 55, 0.9);
+  box-shadow: 0 0 6px var(--accent, #4cd137);
   transition: background 0.15s ease-out;
 }
 
@@ -121,4 +121,20 @@
 .ninja-cursor-hover .ninja-cursor-dot {
   background: #f39c12;
   box-shadow: 0 0 8px rgba(243, 156, 18, 0.9);
+}
+
+/* Animación de aparición del panel de ubicación */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.25s ease-out;
 }

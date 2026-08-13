@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeSwitcher from './ThemeSwitcher';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,16 +19,20 @@ function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b-2 border-green-500/30 shadow-lg">
+    <nav
+      className="fixed top-0 inset-x-0 z-50 bg-black/40 backdrop-blur-md border-b shadow-lg"
+      style={{ borderColor: 'rgba(var(--accent-rgb), 0.3)' }}
+    >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
-          {/* Logo y nombre (IZQUIERDA) */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-2xl shadow-lg">
-              🐢
-            </div>
-            <span className="font-elegant font-bold text-xl sm:text-2xl text-green-400 tracking-wide">
+         {/* Logo y nombre (IZQUIERDA) */}
+          <Link to="/" className="flex items-center gap-3 ml-2 sm:ml-6 lg:ml-10">
+            <img src="/logo.png" alt="Olivos Pizzi" className="w-12 h-12 rounded-full object-cover shadow-lg" />
+            <span
+              className="font-elegant font-bold text-xl sm:text-2xl tracking-wide"
+              style={{ color: 'var(--accent)' }}
+            >
               Olivos Pizzi
             </span>
           </Link>
@@ -38,21 +43,26 @@ function Navbar() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`
-                  font-barlow font-semibold text-sm uppercase tracking-wide
-                  transition-all duration-300
-                  hover:text-green-400
-                  ${isActive(link.path) ? 'text-green-400 border-b-2 border-green-400 pb-1' : 'text-gray-300'}
-                `}
+                className="font-barlow font-semibold text-sm uppercase tracking-wide transition-all duration-300 pb-1"
+                style={
+                  isActive(link.path)
+                    ? { color: 'var(--accent)', borderBottom: '2px solid var(--accent)' }
+                    : { color: '#d1d5db' }
+                }
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
+          {/* Selector de color (SIEMPRE visible, incluso en móvil) */}
+          <div className="ml-4 lg:ml-6">
+            <ThemeSwitcher />
+          </div>
+
           {/* Botón menú móvil */}
           <button
-            className="lg:hidden text-white"
+            className="lg:hidden text-white ml-3"
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,11 +83,12 @@ function Navbar() {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`
-                  font-barlow font-semibold text-sm uppercase tracking-wide
-                  py-2 px-4 rounded-lg transition-all
-                  ${isActive(link.path) ? 'bg-green-500/20 text-green-400' : 'text-gray-300 hover:bg-white/5'}
-                `}
+                className="font-barlow font-semibold text-sm uppercase tracking-wide py-2 px-4 rounded-lg transition-all"
+                style={
+                  isActive(link.path)
+                    ? { backgroundColor: 'rgba(var(--accent-rgb), 0.15)', color: 'var(--accent)' }
+                    : { color: '#d1d5db' }
+                }
               >
                 {link.name}
               </Link>

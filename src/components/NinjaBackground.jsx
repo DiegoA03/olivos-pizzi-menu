@@ -1,5 +1,12 @@
 import { useEffect, useRef } from 'react';
 
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 function NinjaBackground() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: null, y: null });
@@ -39,7 +46,7 @@ function NinjaBackground() {
     window.addEventListener('resize', createShurikens);
 
     // Dibujar un shuriken (estrella de 4 puntas)
-    function drawShuriken(s) {
+    function drawShuriken(s, accent) {
       ctx.save();
       ctx.translate(s.x, s.y);
       ctx.rotate(s.rotation);
@@ -56,8 +63,8 @@ function NinjaBackground() {
         ctx.lineTo(innerX, innerY);
       }
       ctx.closePath();
-      ctx.fillStyle = '#4cd137';
-      ctx.shadowColor = '#4cd137';
+      ctx.fillStyle = accent;
+      ctx.shadowColor = accent;
       ctx.shadowBlur = 15 * s.glow;
       ctx.globalAlpha = 0.85;
       ctx.fill();
@@ -77,16 +84,21 @@ function NinjaBackground() {
     window.addEventListener('mouseleave', handleMouseLeave);
 
     function animate() {
+      // Leer el color del tema activo en CADA frame (para que reaccione al cambio al instante)
+      const accent = getComputedStyle(document.documentElement)
+        .getPropertyValue('--accent')
+        .trim() || '#4cd137';
+
       // Fondo con textura sutil tipo "alcantarilla"
       ctx.fillStyle = '#050805';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Viñeta radial verde muy sutil
+      // Viñeta radial sutil con el color del tema
       const gradient = ctx.createRadialGradient(
         canvas.width / 2, canvas.height / 2, 0,
         canvas.width / 2, canvas.height / 2, canvas.width * 0.7
       );
-      gradient.addColorStop(0, 'rgba(76, 209, 55, 0.07)');
+      gradient.addColorStop(0, hexToRgba(accent, 0.07));
       gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -126,7 +138,7 @@ function NinjaBackground() {
             ctx.beginPath();
             ctx.moveTo(shurikens[i].x, shurikens[i].y);
             ctx.lineTo(shurikens[j].x, shurikens[j].y);
-            ctx.strokeStyle = '#4cd137';
+            ctx.strokeStyle = accent;
             ctx.globalAlpha = (1 - dist / 160) * 0.2;
             ctx.lineWidth = 1;
             ctx.stroke();
@@ -135,9 +147,9 @@ function NinjaBackground() {
       }
       ctx.globalAlpha = 1;
 
-      shurikens.forEach(drawShuriken);
+      shurikens.forEach((s) => drawShuriken(s, accent));
 
-      // Rastro de "corte de katana" siguiendo el mouse
+      // Rastro siguiendo el mouse (usa el mismo color del tema)
       const trail = trailRef.current;
       if (trail.length > 1) {
         ctx.beginPath();
@@ -145,8 +157,8 @@ function NinjaBackground() {
         for (let i = 1; i < trail.length; i++) {
           ctx.lineTo(trail[i].x, trail[i].y);
         }
-        ctx.strokeStyle = '#f39c12';
-        ctx.shadowColor = '#f39c12';
+        ctx.strokeStyle = accent;
+        ctx.shadowColor = accent;
         ctx.shadowBlur = 12;
         ctx.lineWidth = 3;
         ctx.lineCap = 'round';
@@ -155,7 +167,6 @@ function NinjaBackground() {
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
       }
-      // Desvanecer el rastro gradualmente
       if (trail.length > 0 && mouseRef.current.x === null) {
         trailRef.current.shift();
       }
