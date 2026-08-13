@@ -62,7 +62,7 @@ export const menuData = [
     category: 'Especial de la Casa',
     color: 'don',
     items: [
-      { name: 'Lasagna', description: 'Lasagna casera con receta de la casa', price: '12.000', image: '/menu/especial/lasagna.png' }
+      { name: 'Lasagna', description: 'Lasagna casera con receta de la casa', price: '12.000', image: '/menu/papas/lasagna.png' }
     ]
   },
   {
