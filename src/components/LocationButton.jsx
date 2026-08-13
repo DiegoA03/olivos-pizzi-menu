@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 function LocationButton() {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const wrapperRef = useRef(null);
 
   const mapEmbedUrl =
@@ -15,6 +16,7 @@ function LocationButton() {
     function handleClickOutside(e) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
         setOpen(false);
+        setExpanded(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -27,7 +29,9 @@ function LocationButton() {
       {/* Panel del mini mapa (asistente) */}
       {open && (
         <div
-          className="absolute bottom-20 right-0 w-72 sm:w-80 rounded-2xl overflow-hidden border bg-black/95 backdrop-blur-xl shadow-2xl animate-fadeInUp"
+          className={`absolute bottom-20 right-0 rounded-2xl overflow-hidden border bg-black/95 backdrop-blur-xl shadow-2xl animate-fadeInUp transition-all duration-300 ${
+            expanded ? 'w-[90vw] max-w-md' : 'w-72 sm:w-80'
+          }`}
           style={{ borderColor: 'rgba(var(--accent-rgb), 0.4)' }}
         >
           {/* Header del panel */}
@@ -38,19 +42,40 @@ function LocationButton() {
             <span className="font-barlow font-semibold text-white text-sm">
               Nuestra ubicación
             </span>
-            <button
-              onClick={() => setOpen(false)}
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="Cerrar"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setExpanded((prev) => !prev)}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label={expanded ? 'Reducir mapa' : 'Expandir mapa'}
+                title={expanded ? 'Reducir mapa' : 'Expandir mapa'}
+              >
+                {expanded ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                  </svg>
+                )}
+              </button>
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  setExpanded(false);
+                }}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Cerrar"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          {/* Mini mapa */}
-          <div className="h-40 sm:h-48">
+          {/* Mini mapa (interactivo: scroll para zoom, arrastrar para mover) */}
+          <div className={`transition-all duration-300 ${expanded ? 'h-96' : 'h-40 sm:h-48'}`}>
             <iframe
               src={mapEmbedUrl}
               width="100%"

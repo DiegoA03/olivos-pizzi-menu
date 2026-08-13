@@ -10,7 +10,6 @@ function hexToRgba(hex, alpha) {
 function NinjaBackground() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: null, y: null });
-  const trailRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -73,8 +72,6 @@ function NinjaBackground() {
 
     function handleMouseMove(e) {
       mouseRef.current = { x: e.clientX, y: e.clientY };
-      trailRef.current.push({ x: e.clientX, y: e.clientY, life: 1 });
-      if (trailRef.current.length > 25) trailRef.current.shift();
     }
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -84,7 +81,6 @@ function NinjaBackground() {
     window.addEventListener('mouseleave', handleMouseLeave);
 
     function animate() {
-      // Leer el color del tema activo en CADA frame (para que reaccione al cambio al instante)
       const accent = getComputedStyle(document.documentElement)
         .getPropertyValue('--accent')
         .trim() || '#4cd137';
@@ -148,28 +144,6 @@ function NinjaBackground() {
       ctx.globalAlpha = 1;
 
       shurikens.forEach((s) => drawShuriken(s, accent));
-
-      // Rastro siguiendo el mouse (usa el mismo color del tema)
-      const trail = trailRef.current;
-      if (trail.length > 1) {
-        ctx.beginPath();
-        ctx.moveTo(trail[0].x, trail[0].y);
-        for (let i = 1; i < trail.length; i++) {
-          ctx.lineTo(trail[i].x, trail[i].y);
-        }
-        ctx.strokeStyle = accent;
-        ctx.shadowColor = accent;
-        ctx.shadowBlur = 12;
-        ctx.lineWidth = 3;
-        ctx.lineCap = 'round';
-        ctx.globalAlpha = 0.6;
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
-      }
-      if (trail.length > 0 && mouseRef.current.x === null) {
-        trailRef.current.shift();
-      }
 
       animationId = requestAnimationFrame(animate);
     }
