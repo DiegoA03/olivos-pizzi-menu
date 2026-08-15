@@ -6,18 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Olivos Pizzi</title>
-    <meta name="description" content="Olivos Pizzi: pizza artesanal, hamburguesas, hot dogs, choriperros y papas con actitud ninja. Pide a domicilio en Cúcuta, Norte de Santander." />
+    <meta name="description" content="Pizza artesanal, hamburguesas, hot dogs, choriperros y papas al estilo ninja. Visítanos en Soacha, Bogotá." />
     <meta name="keywords" content="Olivos Pizzi, pizza Cúcuta, hamburguesas Cúcuta, comida rápida, domicilios, choriperros, salchipapas" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://olivos-pizzi-menu.vercel.app/" />
 
-    <!-- Open Graph: cómo se ve el link al compartirlo en WhatsApp, Facebook, etc. -->
+    <!-- Open Graph: cómo se ve el link al compartirlo, y nombre oficial del sitio -->
+    <meta property="og:site_name" content="Olivos Pizzi" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Olivos Pizzi | Pizza, Hamburguesas y Comida Rápida en Cúcuta" />
-    <meta property="og:description" content="Pizza artesanal, hamburguesas, hot dogs, choriperros y papas con actitud ninja. Pide a domicilio en Cúcuta." />
+    <meta property="og:description" content="Pizza artesanal, hamburguesas, hot dogs, choriperros y papas al estilo ninja. Visítanos en Soacha, Bogotá." />
     <meta property="og:image" content="https://olivos-pizzi-menu.vercel.app/logo.png" />
     <meta property="og:url" content="https://olivos-pizzi-menu.vercel.app/" />
     <meta property="og:locale" content="es_CO" />
+
+    <!-- Datos estructurados: le confirma a Google que eres un restaurante real -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Olivos Pizzi",
+      "image": "https://olivos-pizzi-menu.vercel.app/logo.png",
+      "url": "https://olivos-pizzi-menu.vercel.app/",
+      "telephone": "+573208198473",
+      "servesCuisine": ["Pizza", "Comida Rápida", "Hamburguesas"],
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Dg 42 #14C-13",
+        "addressLocality": "Soacha",
+        "addressRegion": "Cundinamarca",
+        "addressCountry": "CO"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "17:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "16:00",
+          "closes": "23:59"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
